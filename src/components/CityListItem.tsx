@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 interface CityListItemProps {
+    id: string;
     icon: string;
     cityName: string;
     countryCode: string;
@@ -8,7 +9,7 @@ interface CityListItemProps {
     weatherDescription: string;
 }
 
-export const CityListItem = ({ icon, cityName, countryCode, temperature, weatherDescription } : CityListItemProps) => {
+export const CityListItem = ({ id, icon, cityName, countryCode, temperature } : CityListItemProps) => {
     return (
         <div className="w-200 h-fit rounded-lg flex justify-between p-2 items-center shadow-md bg-[#111618] shadow-sm">
             <div className="flex items-center gap-4">
@@ -22,7 +23,7 @@ export const CityListItem = ({ icon, cityName, countryCode, temperature, weather
             </div>
             <div>
                 <Link 
-                    to={`/details/${cityName}`} 
+                    to={`/details/${id}`} 
                     className="flex items-center justify-center rounded-lg px-4 py-2 bg-[#283339] text-white text-sm hover:bg-gray-700" 
                 >
                     View details

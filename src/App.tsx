@@ -28,7 +28,7 @@ function App() {
       <main className="flex-grow w-full flex justify-center">
         <Routes>
           <Route path="/" element={<WeatherList />} />
-          <Route path="/details/:cityName" element={<WeatherDetails />} />
+          <Route path="/details/:cityId" element={<WeatherDetails />} />
         </Routes>
       </main>
       <footer className="w-full flex flex-col gap-6 px-5 py-10 text-center @container mt-auto">
