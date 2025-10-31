@@ -1,6 +1,7 @@
 export interface CityWeather {
     id: string;
     icon: string;
+    iconName: string;
     cityName: string;
     countryCode: string;
     temperature: number;
@@ -32,6 +33,7 @@ export interface CityWeather {
     {
       id: 'paris-fr',
       icon: '☀️',
+      iconName: 'sunny',
       cityName: "Paris",
       countryCode: "FR",
       temperature: 18,
@@ -61,6 +63,7 @@ export interface CityWeather {
     {
       id: 'london-gb',
       icon: '☁️',
+      iconName: 'cloud',
       cityName: "London",
       countryCode: "GB",
       temperature: 15,

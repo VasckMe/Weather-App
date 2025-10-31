@@ -1,5 +1,3 @@
-// tailwind.config.js
-
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -10,15 +8,20 @@ export default {
     theme: {
       extend: {
         colors: {
-          // Kolory z Twojego projektu HTML
-          "primary": "#1193d4",
-          "background-light": "#f6f7f8",
+          "background-light": "#F5F5F5",
           "background-dark": "#101c22",
+          
+          "primary": "#87CEEB",
+          "accent": "#FFD700",
+          "text-light": "#333333",
+          "text-dark": "#F5F5F5",
+          "card-light": "#FFFFFF",
+          "card-dark": "#1a2a33"
         },
         borderRadius: {
-          "DEFAULT": "0.25rem",
-          "lg": "0.5rem",
-          "xl": "0.75rem",
+          "DEFAULT": "0.5rem",
+          "lg": "0.75rem",
+          "xl": "1rem",
           "full": "9999px"
         },
       },
