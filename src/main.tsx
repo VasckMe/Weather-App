@@ -5,12 +5,15 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import { FavoritesProvider } from './contexts/FavoritesContext'
+import { SearchProvider } from './contexts/SearchContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <FavoritesProvider> {/* <-- 2. Owiń App */}
-        <App />
+      <FavoritesProvider>
+        <SearchProvider>
+          <App />
+        </SearchProvider>
       </FavoritesProvider>
     </BrowserRouter>
   </StrictMode>,

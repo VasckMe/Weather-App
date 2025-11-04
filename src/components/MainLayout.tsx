@@ -1,6 +1,8 @@
 import { Outlet, Link } from 'react-router-dom'
+import { useSearch } from '../contexts/SearchContext'
 
 export const MainLayout = () => {
+  const { query, setQuery } = useSearch()
   return (
     <div className="flex flex-col w-full items-center justify-center min-h-screen"> 
       <header className="w-300 flex items-center justify-between border-b border-solid border-b-surface-dark px-4 py-3 bg-seachBarBg rounded-lg">
@@ -14,7 +16,12 @@ export const MainLayout = () => {
             <div className="text-muted dark:text-muted-dark flex bg-background-light dark:bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
               <span className="material-symbols-outlined">search</span>
             </div>
-            <input className="form-input flex rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border-none bg-background-light dark:bg-surface-dark focus:border-none h-full placeholder:text-muted dark:placeholder:text-muted-dark px-4 rounded-l-none  pl-2" placeholder="Search for a city..." />
+            <input 
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="form-input flex rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border-none bg-background-light dark:bg-surface-dark focus:border-none h-full placeholder:text-muted dark:placeholder:text-muted-dark px-4 rounded-l-none  pl-2" 
+              placeholder="Search for a city..." 
+            />
           </div>
           
           <button className="flex items-center justify-center rounded-lg px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90">
