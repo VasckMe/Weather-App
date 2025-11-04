@@ -12,7 +12,6 @@ interface HourlyForecastItemProps {
     isNow = false,
   }: HourlyForecastItemProps) => {
     
-    // Dynamiczne klasy dla wyróżnienia "Now"
     const containerClasses = isNow
       ? "bg-primary/20 text-primary border border-primary"
       : "bg-background-dark/50 dark:bg-black/20";

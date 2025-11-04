@@ -9,23 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script>
       tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#4A90E2",
-              "background-light": "#F2F2F2",
-              "background-dark": "#101c22",
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "seachBarBg": "#111618",
+                        "primary": "#4A90E2",
+                        "accent": "#FFD700",
+                        "background-light": "#F5F5F5",
+                        "background-dark": "#101c22",
+                        "text-light": "#333333",
+                        "text-dark": "#F5F5F5",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1a2a33",
+                        "surface-dark": "#283339",
+                        "muted-dark": "#9db0b9",
+                        "muted": "#9CA3AF",
+                        "border-dark": "#374151",
+                        "danger": "#EF4444",
+                        "danger-strong": "#B91C1C"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
             },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
-          },
-        },
-      };
+        };
     </script>
     <style>
       .material-symbols-outlined {
