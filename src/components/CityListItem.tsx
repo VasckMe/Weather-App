@@ -6,11 +6,13 @@ interface CityListItemProps {
     icon: string;
     cityName: string;
     countryCode: string;
+    state?: string;
     temperature: number;
     weatherDescription: string;
+    disableLink?: boolean;
 }
 
-export const CityListItem = ({ id, icon, cityName, temperature } : CityListItemProps) => {
+export const CityListItem = ({ id, icon, cityName, temperature, state, countryCode, weatherDescription, disableLink } : CityListItemProps) => {
     const { toggleFavorite, isFavorite } = useFavorites();
     const isFav = isFavorite(id);
 
@@ -29,21 +31,32 @@ export const CityListItem = ({ id, icon, cityName, temperature } : CityListItemP
 
             <div className="flex items-center gap-4 flex-1">
                 <div className="flex items-center justify-center rounded-lg bg-background-light dark:bg-surface-dark size-12">
-                    <span className="text-[28px]">{icon}</span>
+                    {/^[-a-z_]+$/i.test(icon) ? (
+                      <span className="material-symbols-outlined text-3xl text-primary">{icon}</span>
+                    ) : (
+                      <span className="text-[28px]">{icon}</span>
+                    )}
                 </div>
                 <div className="flex flex-col justify-center">
                     <span className="text-white">{cityName}</span>
-                    <span className="text-muted-dark">{temperature}°C</span>
+                    <span className="text-muted dark:text-muted-dark text-xs">{[state, countryCode].filter(Boolean).join(', ')}</span>
+                    <span className="text-muted-dark">{temperature}°C{weatherDescription ? `, ${weatherDescription}` : ''}</span>
                 </div>
             </div>
 
             <div>
-                <Link 
+                {disableLink ? (
+                  <div className="flex items-center justify-center rounded-lg px-4 py-2 bg-surface-dark text-white text-sm">
+                    View details
+                  </div>
+                ) : (
+                  <Link 
                     to={`/details/${id}`} 
                     className="flex items-center justify-center rounded-lg px-4 py-2 bg-surface-dark text-white text-sm hover:bg-gray-700" 
-                >
+                  >
                     View details
-                </Link>
+                  </Link>
+                )}
             </div>
         </div>
     )

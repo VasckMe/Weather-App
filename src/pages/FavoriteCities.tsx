@@ -1,11 +1,52 @@
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../contexts/FavoritesContext';
-import { DATA } from '../mockData';
+import { DATA, type CityWeather } from '../mockData';
 import { FavoriteCityCard } from '../components/FavoriteCityCard';
+import { useEffect, useMemo, useState } from 'react';
+import { getCurrentWeatherById, iconCodeToMaterialSymbol } from '../services/openWeather';
 
 export const FavoriteCities = () => {
   const { favorites, isFavorite } = useFavorites();  
-  const favoriteCities = DATA.filter(city => isFavorite(city.id));
+  const [apiCities, setApiCities] = useState<CityWeather[]>([]);
+  const favoriteMock = useMemo(() => DATA.filter(city => isFavorite(city.id)), [favorites]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      const numericIds = favorites.filter(id => /^\d+$/.test(id));
+      const loaded: CityWeather[] = [];
+      for (const id of numericIds) {
+        try {
+          const w = await getCurrentWeatherById(Number(id), 'metric');
+          loaded.push({
+            id: String(w.id),
+            icon: iconCodeToMaterialSymbol(w.weather?.[0]?.icon ?? '01d'),
+            iconName: iconCodeToMaterialSymbol(w.weather?.[0]?.icon ?? '01d'),
+            cityName: w.name,
+            countryCode: w.sys?.country ?? '',
+            temperature: Math.round(w.main?.temp ?? 0),
+            weatherDescription: w.weather?.[0]?.main ?? '',
+            details: {
+              feelsLike: Math.round(w.main?.feels_like ?? 0),
+              wind: `${w.wind?.speed ?? '-'} m/s`,
+              humidity: `${w.main?.humidity ?? '-'}%`,
+              uvIndex: '-',
+              pressure: `${w.main?.pressure ?? '-'} hPa`,
+              visibility: `${(w.visibility ?? 0) / 1000} km`,
+              sunrise: `@${w.sys?.sunrise ?? '-'}`,
+            },
+            hourlyForecast: [],
+            sevenDayForecast: [],
+          });
+        } catch (_) { /* ignore */ }
+      }
+      if (!cancelled) setApiCities(loaded);
+    }
+    load();
+    return () => { cancelled = true };
+  }, [favorites]);
+
+  const favoriteCities = [...favoriteMock, ...apiCities];
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-dark text-text-dark">
